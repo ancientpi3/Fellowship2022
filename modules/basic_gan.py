@@ -17,6 +17,13 @@ from keras.layers import Dropout
 from matplotlib import pyplot
 import cv2
 
+#probabilistic generator parameters
+mean = .0
+scale = .2
+
+#model meta parameters
+lr = .0005
+
 def show(image):
   cv2_imshow(zoom(image*255,8))
   
