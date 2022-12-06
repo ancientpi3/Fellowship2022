@@ -33,7 +33,7 @@ def zoom(img, zoom_factor=1.5):
 def generated_image(mean, stddev, minval, maxval):
   return np.clip(np.random.normal(loc=mean, scale=stddev,size=(28,28)), minval, maxval)
   
-def generate_data(mean=0, scale=.2, data_size = 100):
+def generate_mixed_data(mean=0, scale=.2, data_size = 100):
   data = []
   labels = []
   for _ in range(data_size):
@@ -41,6 +41,14 @@ def generate_data(mean=0, scale=.2, data_size = 100):
     labels.append(0)
     data.append(np.random.rand(28,28))
     labels.append(1)
+  return (np.array(labels),np.array(data))
+
+def generate_real_data(mean=0, scale=.2, data_size = 100):
+  data = []
+  labels = []
+  for _ in range(data_size):
+    data.append(generated_image(mean,scale,0,1))
+    labels.append(0)
   return (np.array(labels),np.array(data))
 
 def define_discriminator(in_shape=(28,28,1)):
