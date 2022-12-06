@@ -15,6 +15,7 @@ from keras.layers import Conv2DTranspose
 from keras.layers import LeakyReLU
 from keras.layers import Dropout
 from matplotlib import pyplot
+from google.colab.patches import cv2_imshow
 import cv2
 
 #probabilistic generator parameters
