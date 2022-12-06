@@ -82,3 +82,7 @@ def define_generator(latent_dim):
 	model.add(LeakyReLU(alpha=0.2))
 	model.add(Conv2D(1, (7,7), activation='sigmoid', padding='same'))
 	return model
+def train_discriminator(d_model, epochs=10):
+	labels,data = generate_data()
+	valid_labels, valid_data = generate_data(mean=.2,scale=.3,data_size=50)
+	return d_model.fit(x = data, y = labels, epochs=epochs, validation_data=(valid_data,valid_labels))
