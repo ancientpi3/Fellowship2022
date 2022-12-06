@@ -52,6 +52,14 @@ def generate_real_data(mean=0, scale=.2, data_size = 100):
     labels.append(0)
   return (np.array(labels),np.array(data))
 
+def generate_fake_data(mean=0, scale=.2, data_size = 100):
+  data = []
+  labels = []
+  for _ in range(data_size):
+    data.append(np.random.rand(28,28))
+    labels.append(1)
+  return (np.array(labels),np.array(data))
+
 def define_discriminator(in_shape=(28,28,1)):
   model = Sequential()
   model.add(Conv2D(64, (3,3), strides=(2, 2), padding='same', input_shape=in_shape, activation='relu'))
