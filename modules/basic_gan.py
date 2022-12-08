@@ -39,26 +39,26 @@ def generate_mixed_data(mean=0, scale=.2, data_size = 100):
   labels = []
   for _ in range(data_size):
     data.append(generated_image(mean,scale,0,1))
-    labels.append(0)
-    data.append(np.random.rand(28,28))
     labels.append(1)
-  return (np.array(labels),np.array(data))
+    data.append(np.random.rand(28,28))
+    labels.append(0)
+  return (np.array(data),np.array(labels))
 
 def generate_real_data(mean=0, scale=.2, data_size = 100):
   data = []
   labels = []
   for _ in range(data_size):
     data.append(generated_image(mean,scale,0,1))
-    labels.append(0)
-  return (np.array(labels),np.array(data))
+    labels.append(1)
+  return (np.array(data),np.array(labels))
 
 def generate_fake_data(mean=0, scale=.2, data_size = 100):
   data = []
   labels = []
   for _ in range(data_size):
     data.append(np.random.rand(28,28))
-    labels.append(1)
-  return (np.array(labels),np.array(data))
+    labels.append(0)
+  return (np.array(data),np.array(labels))
 
 def define_discriminator(in_shape=(28,28,1)):
   model = Sequential()
