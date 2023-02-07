@@ -8,7 +8,19 @@ import os
 from PIL import Image
 from keras.initializers import RandomNormal
 
+def folder_to_numpy(folder_path,take=400):
+    images = []
+    count=0
+    for filename in os.listdir(folder_path):
 
+        if filename.endswith(".jpg"):
+            image = Image.open(os.path.join(folder_path, filename))
+            image=image.resize((64,64))
+            images.append(np.array(image))
+        count+=1
+        if count>=take:
+          break
+    return np.array(images)
 
 def discriminator(in_shape=(64,64,3),dim=64):
   init = RandomNormal(stddev=0.02)
