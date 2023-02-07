@@ -20,7 +20,9 @@ def folder_to_numpy(folder_path,take=400):
         count+=1
         if count>=take:
           break
-    return np.array(images)
+    images = np.array(images)
+    images = 2*(images/255)-1
+    return images
 
 def discriminator(in_shape=(64,64,3),dim=64):
   init = RandomNormal(stddev=0.02)
