@@ -10,7 +10,7 @@ from keras.initializers import RandomNormal
 
 def folder_to_numpy(folder_path,take=400):
     images = []
-    count=0
+
 	
     #for filename in os.listdir(folder_path):
     for i in range(take):
@@ -19,7 +19,6 @@ def folder_to_numpy(folder_path,take=400):
             image = Image.open(os.path.join(folder_path, filename))
             image=image.resize((64,64))
             images.append(np.array(image))
-        count+=1
 
     images = np.array(images)
     images = 2*(images/255)-1
