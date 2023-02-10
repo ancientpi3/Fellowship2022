@@ -14,11 +14,11 @@ def folder_to_numpy(folder_path,take=400):
 	
     #for filename in os.listdir(folder_path):
     for i in range(take):
-	    filename = random.choice(os.listdir(folder_path))
-        if filename.endswith(".jpg"):
-            image = Image.open(os.path.join(folder_path, filename))
-            image=image.resize((64,64))
-            images.append(np.array(image))
+	filename = random.choice(os.listdir(folder_path))
+	if filename.endswith(".jpg"):
+		image = Image.open(os.path.join(folder_path, filename))
+		image=image.resize((64,64))
+		images.append(np.array(image))
 
     images = np.array(images)
     images = 2*(images/255)-1
