@@ -7,23 +7,21 @@ import cv2
 import os
 from PIL import Image
 from keras.initializers import RandomNormal
+import random
 
 def folder_to_numpy(folder_path,take=400):
-    images = []
+  images = []
 
-	
-    #for filename in os.listdir(folder_path):
-    for i in range(take):
-	filename = random.choice(os.listdir(folder_path))
-	if filename.endswith(".jpg"):
-		image = Image.open(os.path.join(folder_path, filename))
-		image=image.resize((64,64))
-		images.append(np.array(image))
+  for i in range(take):
+    filename = random.choice(os.listdir(folder_path))
+    if filename.endswith(".jpg"):
+      image = Image.open(os.path.join(folder_path, filename))
+      image=image.resize((64,64))
+      images.append(np.array(image))
 
-    images = np.array(images)
-    images = 2*(images/255)-1
-    return images
-
+  images = np.array(images)
+  images = 2*(images/255)-1
+  return images
 def discriminator(in_shape=(64,64,3),dim=64):
   init = RandomNormal(stddev=0.02)
   discriminator_input = keras.Input(shape=(64,64,3),name="d_input")
