@@ -105,7 +105,7 @@ def save_plot(examples, epoch, n=5):
  
 def train(d_model,g_model,gan_model, x_train, epochs=400, batches_per_epoch=64, verbose=1, print_every=20):
   latent_dim = g_model.input.shape[1]
-  batch_size = 24
+  batch_size = 64
   half_batch = int(batch_size/2)
   batches_per_epoch = 64
   save_plot(grab_fake_batch(g_model,50).reshape(50,64,64,3),epoch=0)
