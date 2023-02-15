@@ -108,7 +108,7 @@ def train(d_model,g_model,gan_model, x_train, epochs=400, batches_per_epoch=64, 
   batch_size = 64
   half_batch = int(batch_size/2)
   batches_per_epoch = 64
-  save_plot(grab_fake_batch(g_model,50).reshape(50,64,64,3),epoch=0)
+  save_plot(grab_fake_batch(g_model,25).reshape(25,64,64,3),epoch=0)
   for epoch in range(epochs):
     print("Epoch: ",epoch)
     for _ in range(batches_per_epoch):
@@ -129,4 +129,4 @@ def train(d_model,g_model,gan_model, x_train, epochs=400, batches_per_epoch=64, 
 
 
     if(epoch%print_every==print_every-1):
-      save_plot(grab_fake_batch(g_model,50).reshape(50,64,64,3),epoch=epoch)
+      save_plot(grab_fake_batch(g_model,25).reshape(25,64,64,3),epoch=epoch)
