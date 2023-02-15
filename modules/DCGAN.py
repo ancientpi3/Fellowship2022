@@ -8,13 +8,8 @@ import os
 from PIL import Image
 from keras.initializers import RandomNormal
 import random
-# Garbage Collector - use it like gc.collect()
 import gc
 
-# Custom Callback To Include in Callbacks List At Training Time
-class GarbageCollectorCallback(tf.keras.callbacks.Callback):
-    def on_epoch_end(self, epoch, logs=None):
-        gc.collect()
 def folder_to_numpy(folder_path,take=400):
   images = []
 
@@ -124,6 +119,7 @@ def train(d_model,g_model,gan_model, x_train, epochs=400, batches_per_epoch=64, 
   batches_per_epoch = 64
   save_plot(grab_fake_batch(g_model,25).reshape(25,64,64,3),epoch=0)
   for epoch in range(epochs):
+    gc.collect()
     print("Epoch: ",epoch)
     for _ in range(batches_per_epoch):
       d_model.trainable = True
