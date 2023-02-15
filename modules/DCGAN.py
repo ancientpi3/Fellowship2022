@@ -13,6 +13,8 @@ def folder_to_numpy(folder_path,take=400):
   images = []
 
   for i in range(take):
+    if (i%100 == 0):
+      print(i)
     filename = random.choice(os.listdir(folder_path))
     if filename.endswith(".jpg"):
       image = Image.open(os.path.join(folder_path, filename))
