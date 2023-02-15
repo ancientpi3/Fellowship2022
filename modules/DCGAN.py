@@ -27,16 +27,16 @@ def discriminator(in_shape=(64,64,3),dim=64):
   discriminator_input = keras.Input(shape=(64,64,3),name="d_input")
   
   x = keras.layers.Conv2D(64,(5,5),strides = (2,2),padding = "same",kernel_initializer=init, activation="leaky_relu")(discriminator_input)
-  x = keras.layers.BatchNormalization(momentum=.9)(x,training=False)
+  #x = keras.layers.BatchNormalization(momentum=.9)(x,training=False)
 
   x = keras.layers.Conv2D(128,(5,5),strides = (2,2),padding = "same",kernel_initializer=init, activation="leaky_relu")(x)
-  x = keras.layers.BatchNormalization(momentum=.9)(x,training=False)
+  #x = keras.layers.BatchNormalization(momentum=.9)(x,training=False)
 
   x = keras.layers.Conv2D(256,(5,5),strides = (2,2),padding = "same",kernel_initializer=init, activation="leaky_relu")(x)
-  x = keras.layers.BatchNormalization(momentum=.9)(x,training=False)
+  #x = keras.layers.BatchNormalization(momentum=.9)(x,training=False)
 
   x = keras.layers.Conv2D(512,(5,5),strides = (2,2),padding = "same",kernel_initializer=init, activation="leaky_relu")(x)
-  x = keras.layers.BatchNormalization(momentum=.9)(x,training=False)
+  #x = keras.layers.BatchNormalization(momentum=.9)(x,training=False)
   x = keras.layers.Flatten()(x)
   
   discriminator_output = keras.layers.Dense(1, activation='sigmoid')(x)
