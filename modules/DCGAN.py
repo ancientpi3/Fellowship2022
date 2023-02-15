@@ -27,23 +27,27 @@ def discriminator(in_shape=(64,64,3),dim=64):
   discriminator_input = keras.Input(shape=(64,64,3),name="d_input")
   
   x = keras.layers.Conv2D(64,(5,5),strides = (2,2),padding = "same",kernel_initializer=init, activation="leaky_relu")(discriminator_input)
-  #x = keras.layers.BatchNormalization(momentum=.9)(x,training=False)
-
+  x = keras.layers.BatchNormalization(momentum=.9)(x,training=False)
+  x = keras.layers.Dropout(rate=.5)(x)
+	
   x = keras.layers.Conv2D(128,(5,5),strides = (2,2),padding = "same",kernel_initializer=init, activation="leaky_relu")(x)
-  #x = keras.layers.BatchNormalization(momentum=.9)(x,training=False)
+  x = keras.layers.BatchNormalization(momentum=.9)(x,training=False)
+  x = keras.layers.Dropout(rate=.5)(x)
 
   x = keras.layers.Conv2D(256,(5,5),strides = (2,2),padding = "same",kernel_initializer=init, activation="leaky_relu")(x)
-  #x = keras.layers.BatchNormalization(momentum=.9)(x,training=False)
+  x = keras.layers.BatchNormalization(momentum=.9)(x,training=False)
+  x = keras.layers.Dropout(rate=.5)(x)
 
   x = keras.layers.Conv2D(512,(5,5),strides = (2,2),padding = "same",kernel_initializer=init, activation="leaky_relu")(x)
-  #x = keras.layers.BatchNormalization(momentum=.9)(x,training=False)
+  x = keras.layers.BatchNormalization(momentum=.9)(x,training=False)
+  x = keras.layers.Dropout(rate=.5)(x)
   x = keras.layers.Flatten()(x)
   
   discriminator_output = keras.layers.Dense(1, activation='sigmoid')(x)
 
 
   model = keras.Model(discriminator_input, discriminator_output,name="discriminator")
-  opt = keras.optimizers.Adam(lr=0.0002, beta_1=0.5)
+  opt = keras.optimizers.Adam(learning_rate=0.0002, beta_1=0.5)
 
   model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['accuracy'])
   return model
@@ -57,15 +61,19 @@ def generator(latent_dim=128,dim=64):
   x = keras.layers.Dense(n_nodes)(generator_input)
   x = keras.layers.Reshape((4,4,8*64))(x)
   x = keras.layers.BatchNormalization(momentum=.9)(x,training=True)
+  x = keras.layers.Dropout(rate=.5)(x)
 
   x = keras.layers.Conv2DTranspose(256,(5,5),strides=(2,2),padding='same',activation="relu")(x)
   x = keras.layers.BatchNormalization(momentum=.9)(x,training=True)
+  x = keras.layers.Dropout(rate=.3)(x)
 
   x = keras.layers.Conv2DTranspose(128,(5,5),strides=(2,2),padding='same',activation="relu")(x)
   x = keras.layers.BatchNormalization(momentum=.9)(x,training=True)
+  x = keras.layers.Dropout(rate=.3)(x)
 
   x = keras.layers.Conv2DTranspose(64,(5,5),strides=(2,2),padding='same',activation="relu")(x)
   x = keras.layers.BatchNormalization(momentum=.9)(x,training=True)
+  x = keras.layers.Dropout(rate=.3)(x)
 
   generator_output = keras.layers.Conv2DTranspose(3,(5,5),strides=(2,2),padding='same',activation="tanh")(x)
 
@@ -78,7 +86,7 @@ def GAN(d_model,g_model):
 	model.add(g_model)
 	model.add(d_model)
  
-	opt = keras.optimizers.Adam(lr=0.0002, beta_1=0.5)
+	opt = keras.optimizers.Adam(learning_rate=0.0002, beta_1=0.5)
 	model.compile(loss='binary_crossentropy', optimizer=opt)
 	return model
 
