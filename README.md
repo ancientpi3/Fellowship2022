@@ -5,4 +5,4 @@ The experiments folder contains notebooks corresponding with the research poster
 
 The tests folder contains notebooks used to learn Generative Adversarial Networks. 
 
-The modules folder contains the code that was reused in several for the other notebooks. 
+The modules folder contains the code that was reused in several notebooks. 
